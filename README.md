@@ -4,7 +4,7 @@ Authors: Daniel Zhu & Christine Law
 
 ## Abstract
 
-This site serves as a easily accessible report on our findings regarding the relationship of textual element on recipie ratings. More specifically, we will be creating a predictive model to determine: How do the textual elements of a recipe (e.g., description, steps) impact user engagement and ratings?
+This site serves as a easily accessible report on our findings regarding the relationship of textual element on recipie ratings. More specifically, we will be creating a predictive model to determine: How do the textual elements and user engagement of a recipe (e.g., description, reviews) impact ratings? This predictive model will provide valuable insight that benefit both content creators and customers. More specifically, content creators can use this information to create better-optimized content that meets their user preference. On the other hand, consumers will benefit from a more engaging, informative, and enjoyable recipe content.
 
 ## Introduction
 Our analysis utilizes two different datasets: one focused on the contents and characteristics of a recipie, and one consisting of the recipies' ratings and review. Both datasets contain recipie entries posted since 2008. The recipie dataset consists of 10 variables while the ratings dataset consists of 5 variables, all of which we've listed in more detail below.  
@@ -36,6 +36,8 @@ Our analysis utilizes two different datasets: one focused on the contents and ch
 | `'rating'`    | Rating given        |
 | `'review'`    | Review text         |
 
+More specifically, our analysis and predictive model will focus on the columns `'description'`, `'review'`, and `'ratings'`.  
+
 ## Data Cleaning and Exploratory Data Analysis
 In order to make the given datasets easily accessible for our data science question, we will merge the 'ratings' and 'recipies' dataset into one cohesive master dataset.
 
@@ -46,6 +48,23 @@ In order to make the given datasets easily accessible for our data science quest
 3. Then, we will fill in all ratings of 0 with np.nan. In this case, a rating of 0 implies a missing rating for that recipie. Therefore, in order to avoid bias and a potential misconception of a lower and actual average rating, we will fill in all ratings of 0 with np.nan.
 
 4. Next, we will create a Series containg the average rating per recipe and add that data into a new column within our already cleaned dataset. 
+
+Our final cleaned DataFrame contains 234428 rows and 23 columns. Below are the first 5 entries and the columns we find the most relevant to answering our data science question.
+
+| name                                 |     id |      tags | submitted           |   rating |   average rating |   calories (#) |   sugar (PDV) | is_dessert   |   prop_sugar |
+|:-------------------------------------|-------:|----------:|:--------------------|---------:|-----------------:|---------------:|--------------:|:-------------|-------------:|
+| 1 brownies in the world    best ever | 333281 |        ['60-minutes-or-less', 'time-to-make', 'course... | 2008-10-27 00:00:00 |        4 |                4 |          138.4 |            50 | True         |    0.361272  |
+| 1 in canada chocolate chip cookies   | 453467 |        ['60-minutes-or-less', 'time-to-make', 'cuisin.. | 2011-04-11 00:00:00 |        5 |                5 |          595.1 |           211 | False        |    0.354562  |
+| 412 broccoli casserole               | 306168 |        ['60-minutes-or-less', 'time-to-make', 'course... | 2008-05-30 00:00:00 |        5 |                5 |          194.8 |             6 | False        |    0.0308008 |
+| 412 broccoli casserole               | 306168	|        ['60-minutes-or-less', 'time-to-make', 'course... | 2008-02-12 00:00:00 |        5 |                5 |          878.3 |           326 | True         |    0.371172  |
+| 412 broccoli casserole               | 306168	|        ['60-minutes-or-less', 'time-to-make', 'course... | 2012-03-06 00:00:00 |        5 |                5 |          267   |            12 | False        |    0.0449438 |
+
+### Univariate Analysis 
+
+### Bivariate Analysis 
+
+### Interesting Aggregates
+
 
 ## Assessment of Missingness
 
