@@ -10,6 +10,7 @@ This site serves as a easily accessible report on our findings regarding the rel
 Our analysis utilizes two different datasets: one focused on the contents and characteristics of a recipie, and one consisting of the recipies' ratings and review. Both datasets contain recipie entries posted since 2008. The recipie dataset consists of 10 variables while the ratings dataset consists of 5 variables, all of which we've listed in more detail below.  
 
 1. Recipies (83782)
+
 | Column             | Description                                                                                                                                                                                       |
 | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `'name'`           | Recipe name                                                                                                                                                                                       |
@@ -26,6 +27,7 @@ Our analysis utilizes two different datasets: one focused on the contents and ch
 | `'n_ingredients'`  | Number of ingredients in recipe
 
 2. Ratings (731927)
+
 | Column        | Description         |
 | :------------ | :------------------ |
 | `'user_id'`   | User ID             |
