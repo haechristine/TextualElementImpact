@@ -92,7 +92,7 @@ Upon analyzing the dataset, we believe that the 'review' column showcases a miss
 ### Missingness Dependency
 Now, we will more closely examine the `'rating'` column and determine if its missingness is dependent on the missingness of either `'review'` or `'description'`. In order to do so, we will carry out two seperate `permutation tests` , each with running the permutation test by shuffling the missingness of the rating 1000 times.
 
-#### Review and Rating
+> Review and Rating
 **Null Hypothesis:** The missingness of ratings does not depend on the missingness of reviews. 
 
 **Alternative Hypothesis:** The missingness of ratings does depend on the missingness of reviews. 
@@ -107,7 +107,7 @@ Now, we will more closely examine the `'rating'` column and determine if its mis
 
 >Therefore, we reject our null hypothesis that the missingness of ratings does not depend on the missingness or reviews. 
 
-#### Description and Rating 
+> Description and Rating 
 **Null Hypothesis:** The missingness of description does not depend on the missingness of reviews. 
 
 **Alternative Hypothesis:** The missingness of description does depend on the missingness of reviews.
@@ -123,30 +123,48 @@ Now, we will more closely examine the `'rating'` column and determine if its mis
 >Therefore, we fail to reject our null hypothesis that the missingness of description does not depend on the missingness or reviews. 
 
 ## Hypothesis Testing
-As previously stated from our introduction section, we intend to see if there is a correlation between length of recipe description and the TF-IDF scores in predicting the respective recipe's rating. 
+As previously stated from our introduction section, we intend to see how textual elements and user engagement impact recipe ratings. In order to do so, we will cultivate various TF-IDF tables to analyze the textual elements in both the reviews and description. To start of, we will begin by performing hypothesis tests on the lenght of the recipe description and determing whether or not it affects the average rating.
 
-Null Hypothesis: The length of the recipe description does not affect the average rating.
+**Null Hypothesis:** The length of the recipe description does not affect the average rating.
 
-Alternative Hypothesis: The length of the recipe description affects the average rating.
+**Alternative Hypothesis:** The length of the recipe description affects the average rating.
 
-And our test statistic is:
-The difference in mean ratings between recipes with long descriptions and those with short descriptions.
+**Test Statistic:** The difference in mean ratings between recipes with long descriptions and those with short descriptions.
 
-Thus, after testing our hypothesis:
-We concluded with a p-value less than 0.05 that we reject the null hypothesis suggesting that the description length has a significant impact on the rating.
+**Significance Level:** 0.05
+
+**Observed statistic/P-Value:** _______
+
+**insert graphs here**
+
+>Therefore, we reject our null hypothesis, suggesting that the description length has a significant impact on the rating.
 
 ## Framing a Prediction Problem
-To create a a predictive model to answer our data science question 
+Our goal is to predict the average rating of a recipe, depending on user enagment and textual elements, which would have us treat it as a classification problem. We can reorganize the average ratings by rounding the 'floats' into 'ints' and then categorize them into an ordinal quanlitative variable. This allows us to build a multi-class classifier so that our model can predict one of these five possible values for the average rating.
 
-predict ratings classification problem 
+We chose the average rating as our response variable because it effectively represents the overall evaluation of a recipe. Our previous analysis revealed a significant correlation between higher ratings and description length/review length. This suggests that the length of a recipe's description or review might be a useful predictor for the rating.
+
+**not sure if this is also what we want to do?**
+To evaluate our model, we will use the F1 score rather than accuracy. This decision is due to the left-skewed distribution of ratings, with most falling in the higher range (4-5). Using accuracy could be misleading in such an imbalanced scenario, whereas the F1 score provides a more nuanced measure of the model's performance.
+
+Our prediction will be based on all columns in the rating dataset, as listed in the introduction section. These features pertain to the recipes themselves, meaning they are available even if no ratings or reviews have been submitted yet.
 
 ## Baseline Model
-Our baseline model will use a linear regression with the features being "description_length" and "n_steps", using an evaluation metric of the mean absolute error.
+Our baseline model will use a linear regression with the features being "description_length" and "n_steps", both of which are quantitative nominal variables, using an evaluation metric of the mean absolute error.
 
 Some ways that we can improve this baseline model would be through feature engineering. 
+
 This includes including possible predictors of the rating such as the number of ingredients and the preparation time. Other perhaps more advanced things we can do could be to use TF-IDF vectorization which can help capture the importance of words in the descriptions relative to the corpus. Also, we can also include sentiment analysis to see if that correlates with user rating.
 
 ## Final Model
+State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process.
 
+Describe the modeling algorithm you chose, the hyperparameters that ended up performing the best, and the method you used to select hyperparameters and your overall model. Describe how your Final Model’s performance is an improvement over your Baseline Model’s performance.
+
+Optional: Include a visualization that describes your model’s performance, e.g. a confusion matrix, if applicable.
 
 ## Fairness Analysis
+
+Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting p-value, and your conclusion.
+
+Optional: Embed a visualization related to your permutation test in your website.
