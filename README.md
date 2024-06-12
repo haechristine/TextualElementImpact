@@ -49,7 +49,7 @@ In order to make the given datasets easily accessible for our data science quest
 
 4. Next, we will create a Series containg the average rating per recipe and add that data into a new column within our already cleaned dataset. 
 
-Our final cleaned DataFrame contains 234428 rows and 23 columns. Below are the first 5 entries and the columns we find the most relevant to answering our data science question.
+Our final cleaned DataFrame contains 234428 rows and 23 columns. Below are the first 5 entries and the columns we find the most relevant to answering our data science question. There will be repeats in regards to the recipe since we do not want to lose the data on their unique reviews despite it being for the same recipie.
 
 | name                                 |     id |      tags | description           |   rating |   average rating |   review	 |
 |:-------------------------------------|-------:|----------:|:--------------------|---------:|-----------------:|---------------:|
@@ -67,10 +67,43 @@ Our final cleaned DataFrame contains 234428 rows and 23 columns. Below are the f
 
 
 ## Assessment of Missingness
+The final cleaned dataset we have cultivated contains a few missing values, especially in the columns 'rating' and 'review'. Since both of these values are important to our predictive model and analysis, we are going to assess their missingness. 
 
+### NMAR Analysis
+Upon analyzing the dataset, we believe that the 'review' column showcases a missingness of NMAR. NMAR is defined as a column containing missing values dependant on another column in the dataset. Entries that are missing a value in the 'review' column may be because the indivdual had no strong emotions toward the recipie itself, unmotivating themselves in leaving a review. This can be reflected by a missing value in the 'rating' column or even the 'description' or 'steps' column. It's possible that the individual gained strong emotions, negative or postive, due to the number of steps of the recipe such as it being too complex or perfectly simple.
+
+### Missingness Dependency
+- review and rating
+Null Hypothesis: The missingess of ratings does not depends on the missingess of reviews. 
+
+Alternative Hypothesis: The missingess of ratings does depends on the missingess of reviews. 
+
+Test Statistic: Pearson Correlation (The correlation coeeficient that measure linear correlation between two sets of data)
+
+Significance Level: 0.05
+
+Perm test 1000 times
+obs stat/p-value: 0.044
+reject null
+
+- description and rating 
+Null Hypothesis: The missingess of description does not depends on the missingess of reviews. 
+
+Alternative Hypothesis: The missingess of description does depends on the missingess of reviews.
+
+Test Statistic: Pearson Correlation 
+
+Significance Level: 0.05
+
+Perm test 1000 times
+obs stat/p-value: 0.566
+fail to reject
 
 ## Hypothesis Testing
+As previously stated from our introduction section, we intend to see if there is a correlation between length of recipe description and the TF-IDF scores in predicting the respective recipe's rating. 
+
 Null Hypothesis: The length of the recipe description does not affect the average rating.
+
 Alternative Hypothesis: The length of the recipe description affects the average rating.
 
 And our test statistic is:
@@ -80,7 +113,9 @@ Thus, after testing our hypothesis:
 We concluded with a p-value less than 0.05 that we reject the null hypothesis suggesting that the description length has a significant impact on the rating.
 
 ## Framing a Prediction Problem
+To create a a predictive model to answer our data science question 
 
+predict ratings classification problem 
 
 ## Baseline Model
 Our baseline model will use a linear regression with the features being "description_length" and "n_steps", using an evaluation metric of the mean absolute error.
