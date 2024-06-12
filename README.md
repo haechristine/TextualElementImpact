@@ -4,12 +4,12 @@ Authors: Daniel Zhu & Christine Law
 
 ## Abstract
 
-This site serves as a easily accessible report on our findings regarding the relationship of textual element on recipie ratings. More specifically, we will be creating a predictive model to determine: How do the textual elements and user engagement of a recipe (e.g., description, reviews) impact ratings? This predictive model will provide valuable insight that benefit both content creators and customers. More specifically, content creators can use this information to create better-optimized content that meets their user preference. On the other hand, consumers will benefit from a more engaging, informative, and enjoyable recipe content.
+This site serves as a easily accessible report on our findings regarding the relationship of textual element on recipie ratings. More specifically, we will be creating a predictive model to determine: **How do the textual elements and user engagement of a recipe (e.g., description, reviews) impact ratings?** This predictive model will provide valuable insight that benefit both content creators and customers. More specifically, content creators can use this information to create better-optimized content that meets their user preference. On the other hand, consumers will benefit from a more engaging, informative, and enjoyable recipe content.
 
 ## Introduction
 Our analysis utilizes two different datasets: one focused on the contents and characteristics of a recipie, and one consisting of the recipies' ratings and review. Both datasets contain recipie entries posted since 2008. The recipie dataset consists of 10 variables while the ratings dataset consists of 5 variables, all of which we've listed in more detail below.  
 
-1. Recipies (83782 entries)
+1. `Recipies` (83782 entries)
 
 | Column             | Description                                                                                                                                                                                       |
 | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -26,7 +26,7 @@ Our analysis utilizes two different datasets: one focused on the contents and ch
 | `'ingredients'`    | Text for recipe ingredients                                                                                                                                                                       |
 | `'n_ingredients'`  | Number of ingredients in recipe
 
-2. Ratings (731927 entries)
+2. `Ratings` (731927 entries)
 
 | Column        | Description         |
 | :------------ | :------------------ |
@@ -39,13 +39,13 @@ Our analysis utilizes two different datasets: one focused on the contents and ch
 More specifically, our analysis and predictive model will focus on the columns `'description'`, `'review'`, and `'ratings'`.  
 
 ## Data Cleaning and Exploratory Data Analysis
-In order to make the given datasets easily accessible for our data science question, we will merge the 'ratings' and 'recipies' dataset into one cohesive master dataset.
+In order to make the given datasets easily accessible for our data science question, we will merge the `'ratings'` and `'recipies'` dataset into one cohesive master dataset.
 
-1. First we will split up the 'nutrition' column into the respective columns "[calories (#), total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), and carbohydrates (PDV)]"
+1. First we will split up the `'nutrition'` column into the respective columns `"[calories (#), total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), and carbohydrates (PDV)]"`
 
-2. We will then merge the two datasets using a left merge on 'recipe_id'.
+2. We will then merge the two datasets using a left merge on `'recipe_id'`.
 
-3. Then, we will fill in all ratings of 0 with np.nan. In this case, a rating of 0 implies a missing rating for that recipie. Therefore, in order to avoid bias and a potential misconception of a lower and actual average rating, we will fill in all ratings of 0 with np.nan.
+3. Then, we will fill in all ratings of 0 with np.nan. In this case, a rating of 0 implies a missing rating for that recipe. Therefore, in order to avoid bias and a potential misconception of a lower and actual average rating, we will fill in all ratings of 0 with np.nan.
 
 4. Next, we will create a Series containg the average rating per recipe and add that data into a new column within our already cleaned dataset. 
 
@@ -60,11 +60,28 @@ Our final cleaned DataFrame contains 234428 rows and 23 columns. Below are the f
 | 412 broccoli casserole               | 306168	|        ['60-minutes-or-less', 'time-to-make', 'course... | since there are already 411 recipes for brocco... |        5 |                5 |          Loved this. Be sure to completely thaw the br...   |
 
 ### Univariate Analysis 
+For our univarite analysis, we depicted the distribution of ratings, description length, and review length. In the distribution showcasing recipe ratings, there seems to be less lower ratings than higher ratings, resulting in a positive and upward trend. In other words, the recipies with the least entries are those with the lower ratings. In our distribution of description length, we see that the range of the description lengths range from 0-400 words and that there are more reviews that tend to be on the shorter and brief side. Lastly, our distrubution of review length showcases similar trends to the description length, with there being a higher frequency in shorter and concise reviews.
+
+**insert graphs here**
 
 ### Bivariate Analysis 
+For our bivariate analysis, we depicted scatterplots showcasing the relationship between 'Description Length vs. Rating' and 'Review Length vs. Rating'. The first graph reveals that a high ranking recipe tends to have a longer description length compared to those with a lower rating. Similarly, the trend between the 'Review Length vs. Rating' showcases similar results with a recipe with a rank of 4 or 5 having a review length of 300-400 words and more data entries than recipies with lower ratings. This reasoning may be associated with what we will mention in our missingness section, and how reviewers may not leave a review unless they have strong emotions toward the recipe, and in this case it seems that reviewers who had a positive impression on the recipe were more likely to leave a lengthy review. We will also delve deeper about these relationships in our predictive model.
+
+**insert graphs here**
 
 ### Interesting Aggregates
+For this section, we delved deeper into the relationship between the length of the reviews and the rating the recipie recieved. In order to do so, we first utilized the groupby method to group by `'review_length_range'` and then `'rating'`. We then aggregated the dataframe by finding the average rating to produce the table shown below. The significance of this pivot table is that it allows us to see whether or not there is a present and significant corrleation associated with the length of ones review and the rating it recieves. By doing so, we are analyzing if there is another variable other than TF-IDF values that has the ability to predict the recipe ratings.
 
+| review_length_range        | rating         |
+| :------------ | :------------------ |
+| 0-50  | 4.691819             |
+| 51-100 | 4.682951           |
+| 101-150     | 4.622610 |
+| 151-200    | 4.564288        |
+| 201-250   | 4.493744         |
+| 251-300   |4.414634         |
+| 301-350   | 4.418182         |
+| 351-400   | 4.672727         |
 
 ## Assessment of Missingness
 The final cleaned dataset we have cultivated contains a few missing values, especially in the columns 'rating' and 'review'. Since both of these values are important to our predictive model and analysis, we are going to assess their missingness. 
@@ -73,31 +90,37 @@ The final cleaned dataset we have cultivated contains a few missing values, espe
 Upon analyzing the dataset, we believe that the 'review' column showcases a missingness of NMAR. NMAR is defined as a column containing missing values dependant on another column in the dataset. Entries that are missing a value in the 'review' column may be because the indivdual had no strong emotions toward the recipie itself, unmotivating themselves in leaving a review. This can be reflected by a missing value in the 'rating' column or even the 'description' or 'steps' column. It's possible that the individual gained strong emotions, negative or postive, due to the number of steps of the recipe such as it being too complex or perfectly simple.
 
 ### Missingness Dependency
-- review and rating
-Null Hypothesis: The missingess of ratings does not depends on the missingess of reviews. 
+Now, we will more closely examine the `'rating'` column and determine if its missingness is dependent on the missingness of either `'review'` or `'description'`. In order to do so, we will carry out two seperate `permutation tests` , each with running the permutation test by shuffling the missingness of the rating 1000 times.
 
-Alternative Hypothesis: The missingess of ratings does depends on the missingess of reviews. 
+#### Review and Rating
+**Null Hypothesis:** The missingness of ratings does not depend on the missingness of reviews. 
 
-Test Statistic: Pearson Correlation (The correlation coeeficient that measure linear correlation between two sets of data)
+**Alternative Hypothesis:** The missingness of ratings does depend on the missingness of reviews. 
 
-Significance Level: 0.05
+**Test Statistic:** Pearson Correlation (The correlation coefficient that measure linear correlation between two sets of data)
 
-Perm test 1000 times
-obs stat/p-value: 0.044
-reject null
+**Significance Level:** 0.05
 
-- description and rating 
-Null Hypothesis: The missingess of description does not depends on the missingess of reviews. 
+**Observed statistic/P-Value:** 0.044
 
-Alternative Hypothesis: The missingess of description does depends on the missingess of reviews.
+**insert graphs here**
 
-Test Statistic: Pearson Correlation 
+>Therefore, we reject our null hypothesis that the missingness of ratings does not depend on the missingness or reviews. 
 
-Significance Level: 0.05
+#### Description and Rating 
+**Null Hypothesis:** The missingness of description does not depend on the missingness of reviews. 
 
-Perm test 1000 times
-obs stat/p-value: 0.566
-fail to reject
+**Alternative Hypothesis:** The missingness of description does depend on the missingness of reviews.
+
+**Test Statistic:** Pearson Correlation 
+
+**Significance Level:** 0.05
+
+**Observed statistic/P-Value:** 0.566
+
+**insert graphs here**
+
+>Therefore, we fail to reject our null hypothesis that the missingness of description does not depend on the missingness or reviews. 
 
 ## Hypothesis Testing
 As previously stated from our introduction section, we intend to see if there is a correlation between length of recipe description and the TF-IDF scores in predicting the respective recipe's rating. 
