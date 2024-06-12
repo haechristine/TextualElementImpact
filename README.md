@@ -92,7 +92,8 @@ Upon analyzing the dataset, we believe that the 'review' column showcases a miss
 ### Missingness Dependency
 Now, we will more closely examine the `'rating'` column and determine if its missingness is dependent on the missingness of either `'review'` or `'description'`. In order to do so, we will carry out two seperate `permutation tests` , each with running the permutation test by shuffling the missingness of the rating 1000 times.
 
-> Review and Rating
+**_Review and Rating_**
+
 **Null Hypothesis:** The missingness of ratings does not depend on the missingness of reviews. 
 
 **Alternative Hypothesis:** The missingness of ratings does depend on the missingness of reviews. 
@@ -107,7 +108,8 @@ Now, we will more closely examine the `'rating'` column and determine if its mis
 
 >Therefore, we reject our null hypothesis that the missingness of ratings does not depend on the missingness or reviews. 
 
-> Description and Rating 
+**_Description and Rating_** 
+
 **Null Hypothesis:** The missingness of description does not depend on the missingness of reviews. 
 
 **Alternative Hypothesis:** The missingness of description does depend on the missingness of reviews.
