@@ -51,13 +51,13 @@ In order to make the given datasets easily accessible for our data science quest
 
 Our final cleaned DataFrame contains 234428 rows and 23 columns. Below are the first 5 entries and the columns we find the most relevant to answering our data science question.
 
-| name                                 |     id |      tags | submitted           |   rating |   average rating |   calories (#) |   sugar (PDV) | is_dessert   |   prop_sugar |
-|:-------------------------------------|-------:|----------:|:--------------------|---------:|-----------------:|---------------:|--------------:|:-------------|-------------:|
-| 1 brownies in the world    best ever | 333281 |        ['60-minutes-or-less', 'time-to-make', 'course... | 2008-10-27 00:00:00 |        4 |                4 |          138.4 |            50 | True         |    0.361272  |
-| 1 in canada chocolate chip cookies   | 453467 |        ['60-minutes-or-less', 'time-to-make', 'cuisin.. | 2011-04-11 00:00:00 |        5 |                5 |          595.1 |           211 | False        |    0.354562  |
-| 412 broccoli casserole               | 306168 |        ['60-minutes-or-less', 'time-to-make', 'course... | 2008-05-30 00:00:00 |        5 |                5 |          194.8 |             6 | False        |    0.0308008 |
-| 412 broccoli casserole               | 306168	|        ['60-minutes-or-less', 'time-to-make', 'course... | 2008-02-12 00:00:00 |        5 |                5 |          878.3 |           326 | True         |    0.371172  |
-| 412 broccoli casserole               | 306168	|        ['60-minutes-or-less', 'time-to-make', 'course... | 2012-03-06 00:00:00 |        5 |                5 |          267   |            12 | False        |    0.0449438 |
+| name                                 |     id |      tags | description           |   rating |   average rating |   review	 |
+|:-------------------------------------|-------:|----------:|:--------------------|---------:|-----------------:|---------------:|
+| 1 brownies in the world    best ever | 333281 |        ['60-minutes-or-less', 'time-to-make', 'course... | these are the most; chocolatey, moist, rich, d... |        4 |                4 |        These were pretty good, but took forever to ba... |
+| 1 in canada chocolate chip cookies   | 453467 |        ['60-minutes-or-less', 'time-to-make', 'cuisin.. | this is the recipe that we use at my school ca... |        5 |                5 |          Originally I was gonna cut the recipe in half ... |
+| 412 broccoli casserole               | 306168 |        ['60-minutes-or-less', 'time-to-make', 'course... | since there are already 411 recipes for brocco... |        5 |                5 |          This was one of the best broccoli casseroles t... |
+| 412 broccoli casserole               | 306168	|        ['60-minutes-or-less', 'time-to-make', 'course... | since there are already 411 recipes for brocco... |        5 |                5 |         I made this for my son's first birthday party ... |
+| 412 broccoli casserole               | 306168	|        ['60-minutes-or-less', 'time-to-make', 'course... | since there are already 411 recipes for brocco... |        5 |                5 |          Loved this. Be sure to completely thaw the br...   |
 
 ### Univariate Analysis 
 
