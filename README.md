@@ -2,12 +2,11 @@
 
 Authors: Daniel Zhu & Christine Law
 
-## Abstract
+## Introduction
 
 This site serves as a easily accessible report on our findings regarding the relationship of textual element on recipe ratings. More specifically, we will be creating a predictive model to determine: **How do the textual elements and user engagement of a recipe (e.g., description, reviews) impact ratings?** This predictive model will provide valuable insight that benefit both content creators and customers. More specifically, content creators can use this information to create better-optimized content that meets their user preference. On the other hand, consumers will benefit from a more engaging, informative, and enjoyable recipe content.
 
-## Introduction
-Our analysis utilizes two different datasets: one focused on the contents and characteristics of a recipe, and one consisting of the recipes' ratings and review. Both datasets contain recipe entries posted since 2008. The recipe dataset consists of 10 variables while the ratings dataset consists of 5 variables, all of which we've listed in more detail below.  
+Our analysis utilizes two different datasets: one focused on the contents and characteristics of a recipe, and one consisting of the recipes' ratings and review. Both datasets contain recipe entries posted since 2008. The recipe dataset consists of 10 variables while the ratings dataset consists of 5 variables, all of which we've listed in more detail below.   
 
 1. `Recipes` (83782 entries)
 
@@ -142,9 +141,10 @@ As previously stated from our introduction section, we intend to see how textual
 >Therefore, we reject our null hypothesis, suggesting that the description length has a significant impact on the rating.
 
 ## Framing a Prediction Problem
-Our goal is to predict the average rating of a recipe, depending on user enagment and textual elements, which would have us treat it as a classification problem. We can reorganize the average ratings by rounding the 'floats' into 'ints' and then categorize them into an ordinal quanlitative variable. This allows us to build a multi-class classifier so that our model can predict one of these five possible values for the average rating.
+Our goal is to predict the average rating of a recipe, depending on user engangment and textual elements, which would have us treat it as a classification problem. We can reorganize the average ratings by rounding the 'floats' into 'ints' and then categorize them into an ordinal qualitative variable. This allows us to build a multi-class classifier so that our model can predict one of these five possible values for the average rating. 
 
 We chose the average rating as our response variable because it effectively represents the overall evaluation of a recipe. Our previous analysis revealed a significant correlation between higher ratings and description length/review length. This suggests that the length of a recipe's description or review might be a useful predictor for the rating.
+
 
 **not sure if this is also what we want to do?**
 To evaluate our model, we will use the F1 score rather than accuracy. This decision is due to the left-skewed distribution of ratings, with most falling in the higher range (4-5). Using accuracy could be misleading in such an imbalanced scenario, whereas the F1 score provides a more nuanced measure of the model's performance.
