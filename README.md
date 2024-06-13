@@ -6,6 +6,8 @@ Authors: Daniel Zhu & Christine Law
 
 This site serves as an easily accessible report on our findings regarding the relationship of textual elements on recipe ratings. More specifically, we will be creating a predictive model to determine: **How do the textual elements and user engagement of a recipe (e.g., description, reviews) impact ratings?** This predictive model will provide valuable insight that benefit both content creators and customers. More specifically, content creators can use this information to create better-optimized content that meets their user preferences. On the other hand, consumers will benefit from more engaging, informative, and enjoyable recipe content.
 
+Furthermore, when users read a recipe's description it may promise the 'best' or most 'flavorful' rendition of the food that is being made, but the actual review or rating may shine light on the truth of the recipe's quality. Therefore, we want to create a predictive model that can more accurately predict a recipe's rating and determine which variables from the dataset are able to do so.
+
 Our analysis utilizes two different datasets: one focused on the contents and characteristics of a recipe, and one consisting of the recipes' ratings and reviews. Both datasets contain recipe entries posted since 2008. The recipe dataset consists of 10 variables while the ratings dataset consists of 5 variables, all of which we've listed in more detail below.   
 
 1. `Recipes` (83782 entries)
@@ -174,8 +176,7 @@ Upon creating our baseline model, which included `'description_length'` and `'re
 5. `'n_ingredients'`
 > Furthermore, the number of ingredients also contributes toward the complexity as well as the cost-efficiency of the recipe. We believe that the recipes that require a variety of ingredients to have lower ratings since it would cause the individual to buy ingredients they may not have in their pantry at home already, and also ingredients that they may not ever need to use again in the future. Therefore, we believe that adding 'n_ingredients' as a feature in our predictive model would help increase the accuracy.
 
-We used RandomForestClassifier as our modeling algorithm and conducted RandomizedSearchCV to tune the hyperparameters of max_depth and n_estimators of the RandomForestClassifier. Decision trees often exhibit high variance, and we selected these two hyperparameters to help manage variance and prevent overfitting to the training data. The optimal combination of hyperparameters is a max_depth of ____ and n_estimators set to ____.
-
+We used RandomForestClassifier as our modeling algorithm and conducted RandomizedSearchCV to tune the hyperparameters of max_depth, bootstrap, max_features, min_samples_leaf, min_samples_split, and n_estimators of the RandomForestClassifier. Decision trees often exhibit high variance, and we selected these six hyperparameters to help manage variance and prevent overfitting to the training data. The optimal combination of hyperparameters is a max_depth of 10, bootstrap: False, max_features: 'sqrt', min_samples_leaf of 1, min_samples_split of 2, and a n_estimator of 100.
 
 Our chosen metric, accuracy, of the final model is **0.721**, which is a 0.02 increase from the accuracy of the baseline model which was **0.701**. 
 
