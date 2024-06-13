@@ -61,14 +61,28 @@ Our final cleaned DataFrame contains 234428 rows and 23 columns. Below are the f
 | 412 broccoli casserole               | 306168	|        ['60-minutes-or-less', 'time-to-make', 'course... | since there are already 411 recipes for brocco... |        5 |                5 |          Loved this. Be sure to completely thaw the br...   |
 
 ### Univariate Analysis 
-For our univariate analysis, we depicted the distribution of ratings, description length, and review length. In the distribution showcasing recipe ratings, there seem to be fewer lower ratings than higher ratings, resulting in a positive and upward trend. In other words, the recipes with the least entries are those with the lower ratings. In our distribution of description length, we see that the range of the description lengths ranges from 0-400 words and that there are more reviews that tend to be on the shorter and brief side. Lastly, our distribution of review length showcases similar trends to the description length, with there being a higher frequency in shorter and more concise reviews.
+For our univariate analysis, we depicted the distribution of ratings, description length, and review length. 
 
-**insert graphs here**
+In the distribution showcasing recipe ratings, there seem to be fewer lower ratings than higher ratings, resulting in a positive and upward trend. In other words, the recipes with the least entries are those with the lower ratings.
+
+<iframe src="assets/dist_ratings.html" width="800" height="600" frameborder="0" ></iframe>
+
+In our distribution of description length, we see that the range of the description lengths ranges from 0-400 words and that there are more reviews that tend to be on the shorter and brief side.
+
+<iframe src="assets/dist_desc.html" width="800" height="600" frameborder="0" ></iframe>
+
+Lastly, our distribution of review length showcases similar trends to the description length, with there being a higher frequency in shorter and more concise reviews.
+
+<iframe src="assets/dist_reviews.html" width="800" height="600" frameborder="0" ></iframe>
+
 
 ### Bivariate Analysis 
 For our bivariate analysis, we depicted scatterplots showcasing the relationship between 'Description Length vs. Rating' and 'Review Length vs. Rating'. The first graph reveals that a high-ranking recipe tends to have a longer description length compared to those with a lower rating. Similarly, the trend between the 'Review Length vs. Rating' showcases similar results with a recipe with a rank of 4 or 5 having a review length of 300-400 words and more data entries than recipes with lower ratings. This reasoning may be associated with what we will mention in our missingness section, and how reviewers may not leave a review unless they have strong emotions toward the recipe, and in this case, it seems that reviewers who had a positive impression on the recipe were more likely to leave a lengthy review. We will also delve deeper into these relationships in our predictive model.
 
-**insert graphs here**
+<iframe src="assets/desc_len_vs_ratings.html" width="800" height="600" frameborder="0" ></iframe>
+
+<iframe src="assets/review_len_vs_ratings.html" width="800" height="600" frameborder="0" ></iframe>
+
 
 ### Interesting Aggregates
 For this section, we delved deeper into the relationship between the length of the reviews and the rating the recipe received. In order to do so, we first utilized the groupby method to group by `'review_length_range'` and then `'rating'`. We then aggregated the DataFrame by finding the average rating to produce the table shown below. The significance of this pivot table is that it allows us to see whether or not there is a present and significant correlation associated with the length of one's review and the rating it receives. By doing so, we are analyzing if there is another variable other than TF-IDF values that has the ability to predict the recipe ratings.
@@ -137,8 +151,6 @@ As previously stated from our introduction section, we intend to see how textual
 **Significance Level:** 0.05
 
 **Observed statistic/P-Value:** 8.019x10^-19
-
-**insert graphs here**
 
 >Therefore, we reject our null hypothesis, suggesting that the review length has a significant impact on the rating.
 
