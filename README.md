@@ -1,4 +1,4 @@
-# Textual Element Impact on Predicting Recipe Ratings
+# Textual Element and User Engagment Impact on Predicting Recipe Ratings
 
 Authors: Daniel Zhu & Christine Law
 
@@ -124,48 +124,69 @@ Now, we will more closely examine the `'rating'` column and determine if its mis
 >Therefore, we fail to reject our null hypothesis that the missingness of description does not depend on the missingness or reviews. 
 
 ## Hypothesis Testing
-As previously stated from our introduction section, we intend to see how textual elements and user engagement impact recipe ratings. In order to do so, we will cultivate various TF-IDF tables to analyze the textual elements in both the reviews and descriptions. To start off, we will begin by performing hypothesis tests on the length of the recipe description and determining whether or not it affects the average rating.
+As previously stated from our introduction section, we intend to see how textual elements and user engagement impact recipe ratings. In order to do so, we will cultivate various TF-IDF tables to analyze the textual elements in both the reviews and descriptions. To start off, we will begin by performing hypothesis tests on the length of the recipe review and determining whether or not it affects the average rating.
 
-**Null Hypothesis:** The length of the recipe description does not affect the average rating.
+**Null Hypothesis:** The length of the recipe review does not affect the average rating.
 
-**Alternative Hypothesis:** The length of the recipe description affects the average rating.
+**Alternative Hypothesis:** The length of the recipe review affects the average rating.
 
-**Test Statistic:** The difference in mean ratings between recipes with long descriptions and those with short descriptions.
+**Test Statistic:** The difference in mean ratings between recipes with long reviews and those with short reviews.
 
 **Significance Level:** 0.05
 
-**Observed statistic/P-Value:** _______
+**Observed statistic/P-Value:** 1.2033x10-15
 
 **insert graphs here**
 
->Therefore, we reject our null hypothesis, suggesting that the description length has a significant impact on the rating.
+>Therefore, we reject our null hypothesis, suggesting that the review length has a significant impact on the rating.
 
 ## Framing a Prediction Problem
-Our goal is to predict the average rating of a recipe, depending on user engagement and textual elements, which would have us treat it as a classification problem. We can reorganize the average ratings by rounding the 'floats' into 'ints' and then categorize them into an ordinal qualitative variable. This allows us to build a multi-class classifier so that our model can predict one of these five possible values for the average rating. 
+Our goal is to predict the average rating of a recipe, depending on user engagement and textual elements, which would have us treat it as a classification problem. We can reorganize the average ratings by rounding the 'floats' into 'ints' and then categorize them into an ordinal qualitative variable. This allows us to build a multi-class classifier so that our model can predict one of these five possible values [1, 2, 3, 4, 5] for the average rating. 
 
 We chose the average rating as our response variable because it effectively represents the overall evaluation of a recipe. Our previous analysis revealed a significant correlation between higher ratings and description length/review length. This suggests that the length of a recipe's description or review might be a useful predictor for the rating.
 
-
-**not sure if this is also what we want to do?**
-To evaluate our model, we will use the F1 score rather than accuracy. This decision is due to the left-skewed distribution of ratings, with most falling in the higher range (4-5). Using accuracy could be misleading in such an imbalanced scenario, whereas the F1 score provides a more nuanced measure of the model's performance.
-
-Our prediction will be based on all columns in the rating dataset, as listed in the introduction section. These features pertain to the recipes themselves, meaning they are available even if no ratings or reviews have been submitted yet.
+To evaluate our model, we will use the **accuracy** of our prediction model. Furthermore, our prediction will be based on the `'review'` and `'description'` columns in the rating dataset, as listed in the introduction section in order to predict our response variable `'rating'`.
 
 ## Baseline Model
-Our baseline model will use linear regression with the features being "description_length" and "n_steps", both of which are quantitative nominal variables, using an evaluation metric of the mean absolute error.
 
-Some ways that we can improve this baseline model would be through feature engineering. 
+Our baseline model will use RandomForestClassifier with the features being `'description_length'` and `'review_length'`, both of which are quantitative nominal variables, using an evaluation metric of the accuracy. Since both of our features are numerical and not categorical, there was no need to encode any of them. 
 
-This includes including possible predictors of the rating such as the number of ingredients and the preparation time. Other perhaps more advanced things we can do could be to use TF-IDF vectorization which can help capture the importance of words in the descriptions relative to the corpus. Also, we can also include sentiment analysis to see if that correlates with user rating.
+The overall performance of the model resulted in results with a `'accuracy of'` of **0.701**. We believe this performance for a baseline model is fairly "good" since a ~70% accuracy rate is able to describe 3/4 of the predictions accurately. 
+
+However, there are definitely ways in which we can improve this baseline model, one of them being feature engineering. This includes including possible predictors of the rating such as the number of ingredients and the preparation time. Other perhaps more advanced things we can do could be to use TF-IDF vectorization which can help capture the importance of words in the descriptions relative to the corpus. Also, we can also include sentiment analysis to see if that correlates with user rating. We will be delving deeper into this topic in the next section.
 
 ## Final Model
+
+Upon creating our baseline model, which included `'description_length'` and `'review_length'`, we decided that or our final model, to add the following features:
+
+1. `'description_sentiment'`
+> As mentioned in our introduction, we wanted to analyze textual element impact on prediction recipe ratings and we are able to do so by utilizing a Python library called `'TextBlob'` which contains sentiment analysis which determines the sentiment polarity (positive, negative, neutral) and subjectivity of a given text. When creating our data science question, we assumed that description sentiment that carry a more positive connotation would likely result in a higher rating, and those with a negative correlation with a lower rating. By including this feature, we are able to analyze the magnitude in which textual element can contribute toward predicting a recipe's rating. 
+
+2. `'review_sentiment'`
+> The reasons for including this feature is similar to including 'description_sentiment'. We utilized the same Python library `'TextBlob'` to quantify the positive, negative, or neutral connotation of the review. We believe that reviews with a higher sentiment score is likely to result in a higher rating since the review would be positive rather than negative, resulting in a corresponding high or low rating. By including this feature, there would be another variable in consideration to help more accurately predict the rating of a recipe. 
+
+3. `'minutes'`
+> We realized that recipes with a longer preparation and cooking time tend to have lower ratings such as 2 or 3, there fore we thought that including this extra feature would help in improving our accuracy of our prediction model. In other words, there seems to be a clear relationship between the 'minutes' and 'rating' which proves as an advantageous feature to include in our model since its another variable that can accurately predict out model. This also relates to how currently, people are valuing short and fast recipies since its more convenient with their busy schedules. 
+
+4. `'n_steps'`
+> The number of steps ties into our thought of wanting to analyze textual element and thus similar to our reasoning behind 'review_length' and 'description_length'. We believe there to be a correlation with how complex a recipe is and how many steps is required to complete said recipe. Those who are looking for recipes are most likely also looking for ones that are time efficient and not take too long. The more complex a recipe might be, the more prone mistakes and errors are able to happen, leaving a negative emotion toward it. 
+
+5. `'n_ingredients'`
+> Furthermore, the number of ingrediants also contribute toward the complexity as well as the cost-efficeincy of the recipe. We believe that the recipes that require a variety of ingredients to have lower ratings since it would cause the individual to buy ingredients they may not have in their pantry at home already, and also ingredients that they may not ever need to use again in the future. Therefore, we believe that adding 'n_ingredients' as a feature in our predictive model would help increase the accuracy.
+
+Upon **0.721**
 treating ratings as continuous 
 
-State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process.
+State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process. 
 
-Describe the modeling algorithm you chose, the hyperparameters that ended up performing the best, and the method you used to select hyperparameters and your overall model. Describe how your Final Model’s performance is an improvement over your Baseline Model’s performance.
 
-Optional: Include a visualization that describes your model’s performance, e.g. a confusion matrix, if applicable.
+We used RandomForestClassifier as our modeling algorithm and conducted RandomizedSearchCV to tune the hyperparameters of max_depth and n_estimators of the RandomForestClassifier. Decision trees are prone to high variance, and the two hyperparameters we chose serve a way to control the variance and avoid overfitting the training set. The best combination of the hyperparameters is 42 for the max_depth and 142 for the n_estimators.
+
+The metric, F1 Score, of the final model is 0.92, which is a 0.05 increase from the F1 Score of the baseline model. Moreover, the F1 score of each of the rating also improved. The F1 score for each rating categoires are now 0.36, 0.66, 0.68, 0.85, and 0.95 for rating of 1s, 2s, 3s, 4s, and 5s respectively.
+
+
+
+
 
 ## Fairness Analysis
 
