@@ -84,10 +84,10 @@ For this section, we delved deeper into the relationship between the length of t
 | 351-400   | 4.672727         |
 
 ## Assessment of Missingness
-The final cleaned dataset we have cultivated contains a few missing values, especially in the columns 'rating' and 'review'. Since both of these values are important to our predictive model and analysis, we are going to assess their missingness. 
+The final cleaned dataset we have cultivated contains a few missing values, especially in the columns `'rating'` and `'review'`. Since both of these values are important to our predictive model and analysis, we are going to assess their missingness. 
 
 ### NMAR Analysis
-Upon analyzing the dataset, we believe that the 'review' column showcases a missingness of NMAR. NMAR is defined as a column containing missing values dependant on another column in the dataset. Entries that are missing a value in the 'review' column may be because the indivdual had no strong emotions toward the recipe itself, unmotivating themselves in leaving a review. This can be reflected by a missing value in the 'rating' column or even the 'description' or 'steps' column. It's possible that the individual gained strong emotions, negative or postive, due to the number of steps of the recipe such as it being too complex or perfectly simple.
+Upon analyzing the dataset, we believe that the `'review'` column showcases a missingness of NMAR. NMAR is defined as a column containing missing values dependant on another column in the dataset. Entries that are missing a value in the `'review'` column may be because the indivdual had no strong emotions toward the recipe itself, unmotivating themselves in leaving a review. This can be reflected by a missing value in the `'rating'` column or even the `'description'` or `'steps'` column. It's possible that the individual gained strong emotions, negative or postive, due to the number of steps of the recipe such as it being too complex or perfectly simple.
 
 ### Missingness Dependency
 Now, we will more closely examine the `'rating'` column and determine if its missingness is dependent on the missingness of either `'review'` or `'description'`. In order to do so, we will carry out two seperate `permutation tests` , each with running the permutation test by shuffling the missingness of the rating 1000 times.
