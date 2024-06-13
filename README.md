@@ -119,7 +119,7 @@ Now, we will more closely examine the `'rating'` column and determine if its mis
 
 **Observed statistic/P-Value:** 0.049
 
-**insert graphs here**
+<iframe src="assets/rating_by_review.html" width="800" height="600" frameborder="0" ></iframe>
 
 >Therefore, we reject our null hypothesis that the missingness of ratings does not depend on the missingness of reviews. 
 
@@ -135,7 +135,7 @@ Now, we will more closely examine the `'rating'` column and determine if its mis
 
 **Observed statistic/P-Value:** 0.533
 
-**insert graphs here**
+<iframe src="assets/rating_by_desc.html" width="800" height="600" frameborder="0" ></iframe>
 
 >Therefore, we fail to reject our null hypothesis that the missingness of description does not depend on the missingness or reviews. 
 
