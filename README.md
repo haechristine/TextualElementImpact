@@ -73,7 +73,7 @@ In our distribution of description length, we see that the range of the descript
 
 Lastly, our distribution of review length showcases similar trends to the description length, with there being a higher frequency in shorter and more concise reviews.
 
-<iframe src="assets/dist_reviews_len.html" width="800" height="600" frameborder="0" ></iframe>
+<iframe src="assets/dist_review_len.html" width="800" height="600" frameborder="0" ></iframe>
 
 
 ### Bivariate Analysis 
