@@ -1,4 +1,4 @@
-# Textual Element and User Engagment Impact on Predicting Recipe Ratings
+# Textual Element and User Engagement Impact on Predicting Recipe Ratings
 
 Authors: Daniel Zhu & Christine Law
 
@@ -101,7 +101,7 @@ Now, we will more closely examine the `'rating'` column and determine if its mis
 
 **Significance Level:** 0.05
 
-**Observed statistic/P-Value:** 0.044
+**Observed statistic/P-Value:** 0.049
 
 **insert graphs here**
 
@@ -117,7 +117,7 @@ Now, we will more closely examine the `'rating'` column and determine if its mis
 
 **Significance Level:** 0.05
 
-**Observed statistic/P-Value:** 0.566
+**Observed statistic/P-Value:** 0.533
 
 **insert graphs here**
 
@@ -134,7 +134,7 @@ As previously stated from our introduction section, we intend to see how textual
 
 **Significance Level:** 0.05
 
-**Observed statistic/P-Value:** 1.2033x10-15
+**Observed statistic/P-Value:** 8.019x10^-19
 
 **insert graphs here**
 
@@ -151,7 +151,7 @@ To evaluate our model, we will use the **accuracy** of our prediction model. Fur
 
 Our baseline model will use RandomForestClassifier with the features being `'description_length'` and `'review_length'`, both of which are quantitative nominal variables, using an evaluation metric of the accuracy. Since both of our features are numerical and not categorical, there was no need to encode any of them. 
 
-The overall performance of the model resulted in results with a `'accuracy of'` of **0.701**. We believe this performance for a baseline model is fairly "good" since a ~70% accuracy rate is able to describe 3/4 of the predictions accurately. 
+The overall performance of the model resulted in results with an `'accuracy'` of **0.701**. We believe this performance for a baseline model is fairly "good" since a ~70% accuracy rate is able to describe 3/4 of the predictions accurately. 
 
 However, there are definitely ways in which we can improve this baseline model, one of them being feature engineering. This includes including possible predictors of the rating such as the number of ingredients and the preparation time. Other perhaps more advanced things we can do could be to use TF-IDF vectorization which can help capture the importance of words in the descriptions relative to the corpus. Also, we can also include sentiment analysis to see if that correlates with user rating. We will be delving deeper into this topic in the next section.
 
@@ -160,36 +160,37 @@ However, there are definitely ways in which we can improve this baseline model, 
 Upon creating our baseline model, which included `'description_length'` and `'review_length'`, we decided that or our final model, to add the following features:
 
 1. `'description_sentiment'`
-> As mentioned in our introduction, we wanted to analyze textual element impact on prediction recipe ratings and we are able to do so by utilizing a Python library called `'TextBlob'` which contains sentiment analysis which determines the sentiment polarity (positive, negative, neutral) and subjectivity of a given text. When creating our data science question, we assumed that description sentiment that carry a more positive connotation would likely result in a higher rating, and those with a negative correlation with a lower rating. By including this feature, we are able to analyze the magnitude in which textual element can contribute toward predicting a recipe's rating. 
+> As mentioned in our introduction, we wanted to analyze textual element impact on prediction recipe ratings and we are able to do so by utilizing a Python library called `'TextBlob'` which contains sentiment analysis that determines the sentiment polarity (positive, negative, neutral) and subjectivity of a given text. When creating our data science question, we assumed that description sentiment that carry a more positive connotation would likely result in a higher rating and those with a negative correlation with a lower rating. By including this feature, we are able to analyze the magnitude in which textual element can contribute toward predicting a recipe's rating. 
 
 2. `'review_sentiment'`
 > The reasons for including this feature is similar to including 'description_sentiment'. We utilized the same Python library `'TextBlob'` to quantify the positive, negative, or neutral connotation of the review. We believe that reviews with a higher sentiment score is likely to result in a higher rating since the review would be positive rather than negative, resulting in a corresponding high or low rating. By including this feature, there would be another variable in consideration to help more accurately predict the rating of a recipe. 
 
 3. `'minutes'`
-> We realized that recipes with a longer preparation and cooking time tend to have lower ratings such as 2 or 3, there fore we thought that including this extra feature would help in improving our accuracy of our prediction model. In other words, there seems to be a clear relationship between the 'minutes' and 'rating' which proves as an advantageous feature to include in our model since its another variable that can accurately predict out model. This also relates to how currently, people are valuing short and fast recipies since its more convenient with their busy schedules. 
+> We realized that recipes with a longer preparation and cooking time tend to have lower ratings such as 2 or 3, therefore we thought that including this extra feature would help in improving the accuracy of our prediction model. In other words, there seems to be a clear relationship between the 'minutes' and 'rating' which proves as an advantageous feature to include in our model since it's another variable that can accurately predict our model. This also relates to how currently, people are valuing short and fast recipes since it's more convenient with their busy schedules. 
 
 4. `'n_steps'`
-> The number of steps ties into our thought of wanting to analyze textual element and thus similar to our reasoning behind 'review_length' and 'description_length'. We believe there to be a correlation with how complex a recipe is and how many steps is required to complete said recipe. Those who are looking for recipes are most likely also looking for ones that are time efficient and not take too long. The more complex a recipe might be, the more prone mistakes and errors are able to happen, leaving a negative emotion toward it. 
+> The number of steps ties into our thought of wanting to analyze textual element and thus similar to our reasoning behind 'review_length' and 'description_length'. We believe there to be a correlation with how complex a recipe is and how many steps are required to complete said recipe. Those who are looking for recipes are most likely also looking for ones that are time-efficient and do not take too long. The more complex a recipe might be, the more prone mistakes and errors are able to happen, leaving a negative emotion toward it. 
 
 5. `'n_ingredients'`
-> Furthermore, the number of ingrediants also contribute toward the complexity as well as the cost-efficeincy of the recipe. We believe that the recipes that require a variety of ingredients to have lower ratings since it would cause the individual to buy ingredients they may not have in their pantry at home already, and also ingredients that they may not ever need to use again in the future. Therefore, we believe that adding 'n_ingredients' as a feature in our predictive model would help increase the accuracy.
+> Furthermore, the number of ingredients also contributes toward the complexity as well as the cost-efficiency of the recipe. We believe that the recipes that require a variety of ingredients to have lower ratings since it would cause the individual to buy ingredients they may not have in their pantry at home already, and also ingredients that they may not ever need to use again in the future. Therefore, we believe that adding 'n_ingredients' as a feature in our predictive model would help increase the accuracy.
 
-Upon **0.721**
-treating ratings as continuous 
-
-State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process. 
+We used RandomForestClassifier as our modeling algorithm and conducted RandomizedSearchCV to tune the hyperparameters of max_depth and n_estimators of the RandomForestClassifier. Decision trees often exhibit high variance, and we selected these two hyperparameters to help manage variance and prevent overfitting to the training data. The optimal combination of hyperparameters is a max_depth of ____ and n_estimators set to ____.
 
 
-We used RandomForestClassifier as our modeling algorithm and conducted RandomizedSearchCV to tune the hyperparameters of max_depth and n_estimators of the RandomForestClassifier. Decision trees are prone to high variance, and the two hyperparameters we chose serve a way to control the variance and avoid overfitting the training set. The best combination of the hyperparameters is 42 for the max_depth and 142 for the n_estimators.
-
-The metric, F1 Score, of the final model is 0.92, which is a 0.05 increase from the F1 Score of the baseline model. Moreover, the F1 score of each of the rating also improved. The F1 score for each rating categoires are now 0.36, 0.66, 0.68, 0.85, and 0.95 for rating of 1s, 2s, 3s, 4s, and 5s respectively.
-
-
-
-
+Our chosen metric, accuracy, of the final model is **0.721**, which is a 0.02 increase from the accuracy of the baseline model which was **0.701**. 
 
 ## Fairness Analysis
 
-Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting p-value, and your conclusion.
+For our fairness analysis, the two groups we decided to test are short description length and long description length. In order to identify the threshold of what determines a short or long description length, we will be using the median, _35 words_, to classify long descriptions as those containing _more than 35 words_ and short descriptions as those containing _less than or equal to 35 words_. Our choice to use the median as the threshold rather than the mean is that the mean may not be an actual description length that exists within the column, It's important for us to evaluate the precision parity of the model for the two aforementioned groups since we believe it would be important for our prediction model to more accurately identify the rating of a recipe. In the chance that we produce false positives, that would be detrimental for users who are disincentivized to try certain recipes due to a mislabeling of shorter description lengths leading to lower ratings. 
 
-Optional: Embed a visualization related to your permutation test in your website.
+**Null Hypothesis:** Our model is fair. Its precision for recipes with longer description length and shorter description length are roughly the same, and any differences are due to random chance.
+
+**Alternative Hypothesis:** Our model is unfair. Its precision for recipes with longer description length and shorter description length  is lower than its precision for recipes with higher calories.
+
+**Test Statistic:** Difference in precision (long descriptions - short descriptions)
+
+**Significance Level:** 0.05
+
+**Observed statistic/P-Value:** 0.952
+
+> Therefore we fail to reject the null hypothesis which implies that our model is fair. Its precision for recipes with longer description length and shorter description length are roughly the same, and any differences are due to random chance.
