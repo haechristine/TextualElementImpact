@@ -89,14 +89,27 @@ For this section, we delved deeper into the relationship between the length of t
 
 | review_length_range        | rating         |
 | :------------ | :------------------ |
-| 0-50  | 4.691819             |
-| 51-100 | 4.682951           |
-| 101-150     | 4.622610 |
-| 151-200    | 4.564288        |
-| 201-250   | 4.493744         |
-| 251-300   |4.414634         |
-| 301-350   | 4.418182         |
-| 351-400   | 4.672727         |
+| 0-50  | 4.69             |
+| 51-100 | 4.68           |
+| 101-150     | 4.62 |
+| 151-200    | 4.56        |
+| 201-250   | 4.49         |
+| 251-300   |4.41         |
+| 301-350   | 4.42         |
+| 351-400   | 4.67         |
+
+We also found that the relationship between the length of the description and the rating the recipe received depicted a significant correlation between the two. To do so, we first utilized the groupby method to group by `'description_length_range'` and then `'rating'`. We then aggregated the DataFrame by finding the average rating to produce the table shown below. The significance of this pivot table is similar to the significance of the previous table, such that it allows us to see if there is a present and significant correlation associated with the length of one's description and the rating it receives. 
+
+| description_length_range        | rating         |
+| :------------ | :------------------ |
+| 0-50  | 4.68             |
+| 51-100 | 4.68           |
+| 101-150     | 4.68 |
+| 151-200    | 4.67        |
+| 201-250   | 4.73        |
+| 251-300   |4.75        |
+| 301-350   | 4.68         |
+| 351-400   | 4.89         |
 
 ## Assessment of Missingness
 The final cleaned dataset we have cultivated contains a few missing values, especially in the columns `'rating'` and `'review'`. Since both of these values are important to our predictive model and analysis, we are going to assess their missingness. 
