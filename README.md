@@ -69,11 +69,11 @@ In the distribution showcasing recipe ratings, there seem to be fewer lower rati
 
 In our distribution of description length, we see that the range of the description lengths ranges from 0-400 words and that there are more reviews that tend to be on the shorter and brief side.
 
-<iframe src="assets/dist_desc.html" width="800" height="600" frameborder="0" ></iframe>
+<iframe src="assets/dist_desc_len.html" width="800" height="600" frameborder="0" ></iframe>
 
 Lastly, our distribution of review length showcases similar trends to the description length, with there being a higher frequency in shorter and more concise reviews.
 
-<iframe src="assets/dist_reviews.html" width="800" height="600" frameborder="0" ></iframe>
+<iframe src="assets/dist_reviews_len.html" width="800" height="600" frameborder="0" ></iframe>
 
 
 ### Bivariate Analysis 
